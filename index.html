@@ -1167,6 +1167,157 @@ rgba(37,99,235,.4);
 }
 
 
+}/* =========================
+   BOOT SEQUENCE
+========================= */
+
+
+.boot-screen{
+
+position:fixed;
+
+inset:0;
+
+background:
+
+#02040a;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+flex-direction:column;
+
+z-index:9999;
+
+font-family:
+"Space Grotesk",
+sans-serif;
+
+}
+
+
+.boot-title{
+
+font-size:45px;
+
+letter-spacing:5px;
+
+color:#4f8cff;
+
+text-shadow:
+
+0 0 30px
+#2563eb;
+
+
+}
+
+
+.boot-text{
+
+margin-top:25px;
+
+color:#9fb4d4;
+
+font-size:18px;
+
+}
+
+
+.loading-bar{
+
+width:300px;
+
+height:8px;
+
+background:
+
+rgba(
+255,
+255,
+255,
+0.1
+);
+
+margin-top:25px;
+
+border-radius:20px;
+
+overflow:hidden;
+
+}
+
+
+.loading-progress{
+
+height:100%;
+
+width:0%;
+
+background:
+
+linear-gradient(
+90deg,
+#2563eb,
+#4f8cff
+);
+
+
+animation:
+
+loadSystem 3s forwards;
+
+
+}
+
+
+
+@keyframes loadSystem{
+
+
+from{
+
+width:0%;
+
+}
+
+
+to{
+
+width:100%;
+
+}
+
+
+}
+
+
+
+.boot-hide{
+
+animation:
+
+bootExit 1s forwards;
+
+
+}
+
+
+@keyframes bootExit{
+
+
+to{
+
+opacity:0;
+
+visibility:hidden;
+
+}
+
+
 }
   </style>
 
@@ -1427,7 +1578,20 @@ ACTIVE
 </div>
 
 
+<script>
 
+setTimeout(()=>{
+
+document
+.getElementById("boot")
+.classList
+.add("boot-hide");
+
+
+},3500);
+
+
+</script>
 </body>
 
 </html>
