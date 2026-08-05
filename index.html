@@ -1325,8 +1325,29 @@ visibility:hidden;
 <body>
 
 
-<div class="background-glow"></div>
+<div class="boot-screen" id="boot">
 
+    <div class="boot-title">
+        PIXELBOT OS
+    </div>
+
+
+    <div class="boot-text">
+        INITIALISING COMMAND CENTRE...
+    </div>
+
+
+    <div class="loading-bar">
+
+        <div class="loading-progress"></div>
+
+    </div>
+
+
+</div>
+
+
+<div class="background-glow"></div>
 <div class="stars"></div>
 
 
@@ -1577,16 +1598,19 @@ ACTIVE
 
 </div>
 
-
 <script>
 
 setTimeout(()=>{
 
-document
-.getElementById("boot")
-.classList
-.add("boot-hide");
+const boot =
+document.getElementById("boot");
 
+
+if(boot){
+
+boot.classList.add("boot-hide");
+
+}
 
 },3500);
 
