@@ -1,1 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PixelBot Command Centre</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+body{
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    color:white;
+
+    font-family:Inter, sans-serif;
+
+    background:
+
+    radial-gradient(
+        circle at 50% 20%,
+        rgba(37,99,235,0.25),
+        transparent 35%
+    ),
+
+    linear-gradient(
+        135deg,
+        #01030a,
+        #020817,
+        #04152d
+    );
+
+}
+
+
+
+/* Animated background glow */
+
+
+.background-glow{
+
+    position:fixed;
+
+    width:700px;
+
+    height:700px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+        circle,
+        rgba(37,99,235,0.35),
+        transparent 70%
+    );
+
+
+    filter:blur(40px);
+
+    animation:
+    floatGlow 25s infinite alternate;
+
+
+    z-index:-1;
+
+}
+
+
+
+@keyframes floatGlow{
+
+
+0%{
+
+transform:
+translate(
+-150px,
+-100px
+);
+
+}
+
+
+100%{
+
+transform:
+translate(
+300px,
+200px
+);
+
+}
+
+
+}
+
+
+
+/* Stars */
+
+
+.stars{
+
+position:fixed;
+
+inset:0;
+
+background-image:
+
+radial-gradient(
+white 1px,
+transparent 1px
+);
+
+background-size:
+90px 90px;
+
+opacity:.15;
+
+animation:
+starsMove 60s linear infinite;
+
+
+z-index:-1;
+
+}
+
+
+
+@keyframes starsMove{
+
+
+from{
+
+transform:
+translateY(0);
+
+}
+
+
+to{
+
+transform:
+translateY(200px);
+
+}
+
+
+}
+
+
+
+/* NAVIGATION */
+
+
+nav{
+
+height:85px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:
+0 60px;
+
+
+background:
+
+rgba(
+0,
+5,
+20,
+0.55
+);
+
+
+border-bottom:
+
+1px solid
+rgba(
+79,
+140,
+255,
+0.2
+);
+
+
+backdrop-filter:
+blur(15px);
+
+}
+
+
+
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+font-family:
+"Space Grotesk",
+sans-serif;
+
+
+font-size:24px;
+
+font-weight:700;
+
+}
+
+
+
+.logo-icon{
+
+width:45px;
+
+height:45px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+
+border-radius:14px;
+
+
+background:
+
+linear-gradient(
+135deg,
+#2563eb,
+#071a38
+);
+
+
+box-shadow:
+
+0 0 30px
+rgba(
+37,
+99,
+235,
+0.7
+);
+
+}
+
+
+.login{
+
+text-decoration:none;
+
+color:white;
+
+padding:
+12px 25px;
+
+border-radius:12px;
+
+
+background:
+
+rgba(
+37,
+99,
+235,
+0.25
+);
+
+
+border:
+
+1px solid
+rgba(
+79,
+140,
+255,
+0.5
+);
+
+
+transition:.3s;
+
+}
+
+
+.login:hover{
+
+
+box-shadow:
+
+0 0 30px
+rgba(
+79,
+140,
+255,
+0.7
+);
+
+
+transform:
+translateY(-3px);
+/* MAIN INTERFACE */
+
+
+.container{
+
+min-height:
+calc(100vh - 85px);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:
+50px;
+
+}
+
+
+
+.hud{
+
+width:100%;
+
+max-width:1200px;
+
+display:grid;
+
+grid-template-columns:
+1fr 350px;
+
+gap:40px;
+
+}
+
+
+
+.hero{
+
+padding:
+40px;
+
+}
+
+
+
+.status{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:10px;
+
+padding:
+10px 18px;
+
+border-radius:50px;
+
+
+background:
+
+rgba(
+34,
+197,
+94,
+0.1
+);
+
+
+border:
+
+1px solid
+rgba(
+34,
+197,
+94,
+0.35
+);
+
+
+color:#86efac;
+
+margin-bottom:30px;
+
+
+}
+
+
+
+.status-dot{
+
+width:9px;
+
+height:9px;
+
+background:#22c55e;
+
+border-radius:50%;
+
+
+box-shadow:
+
+0 0 15px
+#22c55e;
+
+
+}
+
+
+
+h1{
+
+font-family:
+"Space Grotesk",
+sans-serif;
+
+
+font-size:
+
+clamp(
+50px,
+7vw,
+85px
+);
+
+
+line-height:1;
+
+letter-spacing:-3px;
+
+
+margin-bottom:25px;
+
+
+}
+
+
+
+.blue{
+
+color:#4f8cff;
+
+
+text-shadow:
+
+0 0 40px
+rgba(
+79,
+140,
+255,
+0.6
+);
+
+
+}
+
+
+
+.description{
+
+
+font-size:18px;
+
+line-height:1.7;
+
+color:#9fb4d4;
+
+
+max-width:600px;
+
+
+margin-bottom:40px;
+
+
+}
+
+
+
+
+.buttons{
+
+display:flex;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+
+}
+
+
+
+.launch{
+
+
+text-decoration:none;
+
+color:white;
+
+font-weight:700;
+
+
+padding:
+
+16px 32px;
+
+
+border-radius:14px;
+
+
+background:
+
+linear-gradient(
+135deg,
+#2563eb,
+#123778
+);
+
+
+
+box-shadow:
+
+0 0 40px
+rgba(
+37,
+99,
+235,
+0.5
+);
+
+
+
+transition:.3s;
+
+
+}
+
+
+
+.launch:hover{
+
+
+transform:
+translateY(-5px);
+
+
+box-shadow:
+
+0 0 70px
+rgba(
+37,
+99,
+235,
+0.8
+);
+
+
+}
+
+
+
+
+/* RIGHT HUD PANEL */
+
+
+.panel{
+
+
+padding:
+
+25px;
+
+
+border-radius:20px;
+
+
+background:
+
+rgba(
+255,
+255,
+255,
+0.05
+);
+
+
+
+border:
+
+1px solid
+rgba(
+79,
+140,
+255,
+0.2
+);
+
+
+
+backdrop-filter:
+
+blur(20px);
+
+
+}
+
+
+
+.panel h2{
+
+
+font-family:
+"Space Grotesk",
+sans-serif;
+
+
+margin-bottom:20px;
+
+
+}
+
+
+
+
+.system-line{
+
+
+display:flex;
+
+
+justify-content:space-between;
+
+
+padding:
+
+14px 0;
+
+
+border-bottom:
+
+1px solid
+rgba(
+255,
+255,
+255,
+0.08
+);
+
+
+color:#9fb4d4;
+
+
+}
+
+
+
+.online{
+
+
+color:#22c55e;
+
+}
+
+
+
+
+/* MODULES */
+
+
+.modules{
+
+
+margin-top:40px;
+
+
+display:grid;
+
+
+grid-template-columns:
+repeat(
+2,
+1fr
+);
+
+
+gap:15px;
+
+
+}
+
+
+
+.module{
+
+
+padding:
+
+18px;
+
+
+border-radius:14px;
+
+
+background:
+
+rgba(
+255,
+255,
+255,
+0.04
+);
+
+
+
+border:
+
+1px solid
+rgba(
+79,
+140,
+255,
+0.15
+);
+
+
+
+transition:.3s;
+
+
+}
+
+
+
+.module:hover{
+
+
+border-color:
+
+#4f8cff;
+
+
+transform:
+
+translateY(-5px);
+
+
+}
+
+
+
+.module span{
+
+
+font-size:25px;
+
+
+display:block;
+
+
+margin-bottom:10px;
+
+
+}
+
+
+.module p{
+
+
+color:#9fb4d4;
+
+
+font-size:14px;
+
+
+}
+
+
+
+}
+/* MOBILE */
+
+@media(max-width:900px){
+
+    nav{
+
+        padding:0 25px;
+
+    }
+
+
+    .hud{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .container{
+
+        padding:25px;
+
+    }
+
+
+    h1{
+
+        font-size:50px;
+
+    }
+
+
+    .modules{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+  </style>
+
+</head>
+<body>
+
+
+<div class="background-glow"></div>
+
+<div class="stars"></div>
+
+
+
+<nav>
+
+
+<div class="logo">
+
+
+<div class="logo-icon">
+🌌
+</div>
+
+
+PixelBot
+
+
+</div>
+
+
+
+<a href="/api/discord-login" class="login">
+
+Login With Discord
+
+</a>
+
+
+</nav>
+
+
+
+
+<div class="container">
+
+
+<div class="hud">
+
+
+
+<div class="hero">
+
+
+
+<div class="status">
+
+<div class="status-dot"></div>
+
+SYSTEM ONLINE
+
+</div>
+
+
+
+
+<h1>
+
+PIXELBOT
+
+<span class="blue">
+
+COMMAND CENTRE
+
+</span>
+
+
+</h1>
+
+
+
+<p class="description">
+
+A futuristic Discord management platform
+built for powerful communities.
+Control your servers through one advanced
+interface.
+
+</p>
+
+
+
+
+<div class="buttons">
+
+
+<a href="/api/discord-login" class="launch">
+
+🚀 Launch Command Centre
+
+</a>
+
+
+</div>
+
+
+
+
+<div class="modules">
+
+
+
+<div class="module">
+
+<span>
+🛡️
+</span>
+
+<h3>
+Moderation
+</h3>
+
+<p>
+Advanced server protection
+</p>
+
+</div>
+
+
+
+<div class="module">
+
+<span>
+📈
+</span>
+
+<h3>
+Leveling
+</h3>
+
+<p>
+XP and progression systems
+</p>
+
+</div>
+
+
+
+<div class="module">
+
+<span>
+🎫
+</span>
+
+<h3>
+Tickets
+</h3>
+
+<p>
+Professional support tools
+</p>
+
+</div>
+
+
+
+<div class="module">
+
+<span>
+⚙️
+</span>
+
+<h3>
+Configuration
+</h3>
+
+<p>
+Complete control panel
+</p>
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="panel">
+
+
+<h2>
+SYSTEM MONITOR
+</h2>
+
+
+
+<div class="system-line">
+
+Discord API
+
+<span class="online">
+CONNECTED
+</span>
+
+</div>
+
+
+
+<div class="system-line">
+
+PixelBot Core
+
+<span class="online">
+ONLINE
+</span>
+
+</div>
+
+
+
+<div class="system-line">
+
+Dashboard
+
+<span class="online">
+READY
+</span>
+
+</div>
+
+
+
+<div class="system-line">
+
+Security
+
+<span class="online">
+ACTIVE
+</span>
+
+</div>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+</body>
+
+</html>
