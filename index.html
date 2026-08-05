@@ -333,6 +333,8 @@ translateY(-3px);
 
 .container{
 
+position:relative;
+
 min-height:
 calc(100vh - 85px);
 
@@ -346,7 +348,6 @@ padding:
 50px;
 
 }
-
 
 
 .hud{
@@ -855,9 +856,10 @@ body::after {
 content:"";
 
 position:fixed;
-
+z-index:-1;
 inset:0;
 
+z-index:-1;
 
 background-image:
 
