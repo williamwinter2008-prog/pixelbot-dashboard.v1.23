@@ -843,6 +843,329 @@ font-size:14px;
 
     }
 
+}/* =========================
+   FUI EFFECTS PACK
+========================= */
+
+
+/* HUD GRID */
+
+body::after {
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+
+background-image:
+
+linear-gradient(
+rgba(79,140,255,0.04) 1px,
+transparent 1px
+),
+
+linear-gradient(
+90deg,
+rgba(79,140,255,0.04) 1px,
+transparent 1px
+);
+
+
+background-size:
+60px 60px;
+
+
+animation:
+
+gridMove 30s linear infinite;
+
+
+pointer-events:none;
+
+}
+
+
+@keyframes gridMove {
+
+
+from {
+
+transform:
+translateY(0);
+
+}
+
+
+to {
+
+transform:
+translateY(60px);
+
+}
+
+
+}
+
+
+
+
+
+/* SCAN LINE */
+
+
+.container::before {
+
+
+content:"";
+
+
+position:absolute;
+
+
+left:0;
+
+
+right:0;
+
+
+height:2px;
+
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+#4f8cff,
+
+transparent
+
+);
+
+
+opacity:.5;
+
+
+animation:
+
+scan 8s linear infinite;
+
+
+}
+
+
+
+@keyframes scan {
+
+
+0% {
+
+top:10%;
+
+}
+
+
+100% {
+
+top:90%;
+
+}
+
+
+}
+
+
+
+
+
+/* HUD CORNERS */
+
+
+.panel,
+.module {
+
+
+position:relative;
+
+
+overflow:hidden;
+
+
+}
+
+
+
+.panel::before,
+.module::before {
+
+
+content:"";
+
+
+position:absolute;
+
+
+top:0;
+
+
+left:0;
+
+
+width:25px;
+
+
+height:25px;
+
+
+border-top:
+
+2px solid #4f8cff;
+
+
+border-left:
+
+2px solid #4f8cff;
+
+
+}
+
+
+
+.panel::after,
+.module::after {
+
+
+content:"";
+
+
+position:absolute;
+
+
+bottom:0;
+
+
+right:0;
+
+
+width:25px;
+
+
+height:25px;
+
+
+border-bottom:
+
+2px solid #4f8cff;
+
+
+border-right:
+
+2px solid #4f8cff;
+
+
+}
+
+
+
+
+
+/* FLOATING HUD */
+
+
+.hud {
+
+
+animation:
+
+hudFloat 8s ease-in-out infinite;
+
+
+}
+
+
+
+@keyframes hudFloat {
+
+
+0% {
+
+transform:
+translateY(0);
+
+}
+
+
+50% {
+
+transform:
+translateY(-8px);
+
+}
+
+
+100% {
+
+transform:
+translateY(0);
+
+}
+
+
+}
+
+
+
+
+/* BUTTON PULSE */
+
+
+.launch {
+
+
+animation:
+
+buttonPulse 3s infinite;
+
+
+}
+
+
+
+@keyframes buttonPulse {
+
+
+0% {
+
+box-shadow:
+0 0 20px
+rgba(37,99,235,.4);
+
+}
+
+
+50% {
+
+box-shadow:
+0 0 60px
+rgba(37,99,235,.8);
+
+}
+
+
+100% {
+
+box-shadow:
+0 0 20px
+rgba(37,99,235,.4);
+
+}
+
+
 }
   </style>
 
