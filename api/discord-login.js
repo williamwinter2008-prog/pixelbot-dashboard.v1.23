@@ -4,7 +4,7 @@ const clientID = "1532870250482237530";
 
 
 const redirect =
-"https://YOUR-DOMAIN.vercel.app/api/discord-login";
+"https://https://pixelbot-dashboard-v1-23-3q9f.vercel.app/api/discord-login";
 
 
 const discordURL =
