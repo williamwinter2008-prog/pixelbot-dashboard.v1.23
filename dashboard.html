@@ -64,20 +64,65 @@ color:#4f8cff;
 
 
 <body>
-
+<body>
 
 <div class="dashboard">
+
+<img id="avatar" width="100" style="border-radius:50%;">
 
 <h1>
 PIXELBOT DASHBOARD
 </h1>
 
+<h2 id="username">
+Loading user...
+</h2>
+
 <p>
 Welcome to your command centre.
 </p>
 
-
 </div>
+
+
+<script>
+
+const cookies = document.cookie;
+
+const userCookie = cookies
+.split("; ")
+.find(row => row.startsWith("discord_user="));
+
+
+if(userCookie){
+
+    const user = JSON.parse(
+        decodeURIComponent(
+            userCookie.split("=")[1]
+        )
+    );
+
+
+    document.getElementById("username")
+    .innerHTML =
+    "Welcome, " + user.username;
+
+
+    document.getElementById("avatar")
+    .src =
+    `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+
+}
+
+else {
+
+document.getElementById("username")
+.innerHTML =
+"Not logged in";
+
+}
+
+</script>
 
 
 </body>
