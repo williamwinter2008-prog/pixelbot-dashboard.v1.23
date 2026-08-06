@@ -66,11 +66,30 @@ Authorization:`Bearer ${token.access_token}`
 const user = await userResponse.json();
 
 
+const data = {
+    user: user,
+    guilds: await getGuilds(token.access_token)
+    async function getGuilds(accessToken){
+
+const response = await fetch(
+"https://discord.com/api/users/@me/guilds",
+{
+headers:{
+Authorization:
+`Bearer ${accessToken}`
+}
+});
+
+return await response.json();
+
+}
+};
+
+
 res.setHeader(
 "Set-Cookie",
-`discord_user=${encodeURIComponent(JSON.stringify(user))}; Path=/; Max-Age=3600; SameSite=Lax`
+`discord_data=${encodeURIComponent(JSON.stringify(data))}; Path=/; Max-Age=3600; SameSite=Lax`
 );
-
 
 res.redirect("/dashboard.html");
 
