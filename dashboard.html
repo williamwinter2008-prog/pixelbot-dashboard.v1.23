@@ -7,6 +7,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>PixelBot Dashboard</title>
+    .servers{
+
+margin-top:40px;
+
+}
+
+
+.server{
+
+padding:15px;
+
+margin-top:10px;
+
+background:
+rgba(255,255,255,0.05);
+
+border-radius:12px;
+
+border:
+1px solid rgba(79,140,255,0.2);
+
+display:flex;
+
+justify-content:space-between;
+
+}
+
+
+.server button{
+
+background:#4f8cff;
+
+color:white;
+
+border:none;
+
+padding:8px 15px;
+
+border-radius:8px;
+
+}
 </style>
     .dashboard{
 
@@ -219,7 +260,20 @@ Loading user...
 
 </div>
 
+<div class="servers">
 
+<h2>
+🏠 Your Servers
+</h2>
+
+
+<div id="server-list">
+
+Loading servers...
+
+</div>
+
+</div>
 <div class="cards">
 
 
@@ -269,49 +323,61 @@ Manage support systems.
 
 </div>
 
-
 <script>
 
-const cookies = document.cookie;
-
-const userCookie = cookies
+const cookie = document.cookie
 .split("; ")
-.find(row => row.startsWith("discord_user="));
+.find(row => row.startsWith("discord_data="));
 
 
-if(userCookie){
+if(cookie){
 
-    const user = JSON.parse(
-        decodeURIComponent(
-            userCookie.split("=")[1]
-        )
-    );
-
-
-    document.getElementById("username").innerHTML =
-    "Welcome, " + user.username;
+const data = JSON.parse(
+decodeURIComponent(
+cookie.split("=")[1]
+)
+);
 
 
-    if(user.avatar){
-
-        document.getElementById("avatar").src =
-        `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`;
-
-    }
-    else{
-
-        document.getElementById("avatar").src =
-        "https://cdn.discordapp.com/embed/avatars/0.png";
-
-    }
+const user = data.user;
 
 
-}
+document.getElementById("username").innerHTML =
+"Welcome, " + user.username;
 
-else{
 
-    document.getElementById("username").innerHTML =
-    "No Discord user found";
+
+document.getElementById("avatar").src =
+`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`;
+
+
+
+const servers =
+document.getElementById("server-list");
+
+
+data.guilds.forEach(guild => {
+
+
+servers.innerHTML += `
+
+<div class="server">
+
+<span>
+${guild.name}
+</span>
+
+<button>
+Manage
+</button>
+
+</div>
+
+`;
+
+
+});
+
 
 }
 
