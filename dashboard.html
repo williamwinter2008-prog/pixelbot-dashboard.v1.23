@@ -323,38 +323,11 @@ Manage support systems.
 
 </div>
 
-<script>
-
-const cookie = document.cookie
-.split("; ")
-.find(row => row.startsWith("discord_data="));
-
-
-if(cookie){
-
-const data = JSON.parse(
-decodeURIComponent(
-cookie.split("=")[1]
-)
-);
-
-
-const user = data.user;
-
-
-document.getElementById("username").innerHTML =
-"Welcome, " + user.username;
-
-
-
-document.getElementById("avatar").src =
-`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`;
-
-
-
 const servers =
 document.getElementById("server-list");
 
+
+data.guilds.forEach(guild => {
 
 servers.innerHTML += `
 
@@ -374,13 +347,9 @@ Manage
 
 `;
 
-
 });
 
-
 }
-
-</script>
 
     <script>
 
