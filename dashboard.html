@@ -7,7 +7,125 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>PixelBot Dashboard</title>
-    
+</style>
+    .dashboard{
+
+display:flex;
+width:900px;
+min-height:500px;
+
+background:
+rgba(255,255,255,0.05);
+
+border:
+1px solid rgba(79,140,255,0.3);
+
+border-radius:20px;
+
+overflow:hidden;
+
+}
+
+
+.sidebar{
+
+width:220px;
+
+padding:25px;
+
+background:
+rgba(0,0,0,0.25);
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+
+.sidebar h2{
+
+color:#4f8cff;
+
+}
+
+
+.sidebar button{
+
+padding:12px;
+
+border:none;
+
+border-radius:10px;
+
+background:
+rgba(79,140,255,0.15);
+
+color:white;
+
+cursor:pointer;
+
+}
+
+
+.main{
+
+flex:1;
+
+padding:35px;
+
+}
+
+
+.profile{
+
+display:flex;
+
+align-items:center;
+
+gap:20px;
+
+}
+
+
+.profile img{
+
+border-radius:50%;
+
+border:
+3px solid #4f8cff;
+
+}
+
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:15px;
+
+margin-top:40px;
+
+}
+
+
+.card{
+
+padding:20px;
+
+background:
+rgba(255,255,255,0.05);
+
+border-radius:15px;
+
+border:
+1px solid rgba(79,140,255,0.2);
+
+}
 <style>
 
 body {
@@ -57,16 +175,37 @@ color:#4f8cff;
 
 }
 
-
 </style>
 
 </head>
 
 <body>
 
-<div class="dashboard">
+<<div class="dashboard">
 
-<img id="avatar" width="100" style="border-radius:50%;">
+<div class="sidebar">
+
+<h2>
+🌌 PixelBot
+</h2>
+
+<button>🏠 Home</button>
+<button>🛡 Moderation</button>
+<button>📈 Leveling</button>
+<button>🎫 Tickets</button>
+<button>⚙ Settings</button>
+
+</div>
+
+
+<div class="main">
+
+
+<div class="profile">
+
+<img id="avatar" width="100">
+
+<div>
 
 <h1>
 PIXELBOT DASHBOARD
@@ -74,12 +213,59 @@ PIXELBOT DASHBOARD
 
 <h2 id="username">
 Loading user...
-
 </h2>
 
+</div>
+
+</div>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>
+🛡 Moderation
+</h3>
+
 <p>
-Welcome to your command centre.
+Manage warnings, bans and protection.
 </p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+📈 Leveling
+</h3>
+
+<p>
+Control XP and ranks.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🎫 Tickets
+</h3>
+
+<p>
+Manage support systems.
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
 
 </div>
 
