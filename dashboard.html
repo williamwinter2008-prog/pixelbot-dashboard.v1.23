@@ -86,7 +86,6 @@ Welcome to your command centre.
 
 <script>
 
-
 const cookies = document.cookie;
 
 const userCookie = cookies
@@ -103,15 +102,36 @@ if(userCookie){
     );
 
 
-    document.getElementById("username")
-    .innerHTML =
+    document.getElementById("username").innerHTML =
     "Welcome, " + user.username;
+
+
+    if(user.avatar){
+
+        document.getElementById("avatar").src =
+        `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`;
+
+    }
+    else{
+
+        document.getElementById("avatar").src =
+        "https://cdn.discordapp.com/embed/avatars/0.png";
+
+    }
+
+
+}
+
+else{
+
+    document.getElementById("username").innerHTML =
+    "No Discord user found";
 
 }
 
 </script>
 
-<script>
+    <script>
 
 const cookies = document.cookie.split("; ");
 
