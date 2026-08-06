@@ -87,6 +87,8 @@ Welcome to your command centre.
 
 <script>
 
+<script>
+
 const cookies = document.cookie;
 
 const userCookie = cookies
@@ -106,19 +108,6 @@ if(userCookie){
     document.getElementById("username")
     .innerHTML =
     "Welcome, " + user.username;
-
-
-    document.getElementById("avatar")
-    .src =
-    `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
-
-}
-
-else {
-
-document.getElementById("username")
-.innerHTML =
-"Not logged in";
 
 }
 
