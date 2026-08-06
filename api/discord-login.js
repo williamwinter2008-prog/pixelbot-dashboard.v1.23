@@ -2,13 +2,13 @@ export default async function handler(req, res) {
 
 const clientID = "1532870250482237530";
 
-const clientSecret = "PkpwJxSvp_RkZ75DiuBqrtbMyqO1yv0q";
+const clientSecret = process.env.DISCORD_SECRET;
 
 const redirect =
 "https://pixelbot-dashboard-v1-23-3q9f.vercel.app/api/discord-login";
 
 
-if(!req.query.code){
+if (!req.query.code) {
 
 const discordURL =
 "https://discord.com/oauth2/authorize" +
@@ -23,9 +23,6 @@ return res.redirect(discordURL);
 }
 
 
-const code = req.query.code;
-
-
 const tokenResponse = await fetch(
 "https://discord.com/api/oauth2/token",
 {
@@ -35,16 +32,15 @@ headers:{
 "Content-Type":"application/x-www-form-urlencoded"
 },
 
-body:
-new URLSearchParams({
+body:new URLSearchParams({
 
-client_id:clientID,
+client_id: clientID,
 
-client_secret:clientSecret,
+client_secret: clientSecret,
 
 grant_type:"authorization_code",
 
-code:code,
+code:req.query.code,
 
 redirect_uri:redirect
 
@@ -60,8 +56,7 @@ const userResponse = await fetch(
 "https://discord.com/api/users/@me",
 {
 headers:{
-Authorization:
-`Bearer ${token.access_token}`
+Authorization:`Bearer ${token.access_token}`
 }
 });
 
@@ -71,11 +66,10 @@ const user = await userResponse.json();
 
 res.setHeader(
 "Set-Cookie",
-`discord_user=${encodeURIComponent(JSON.stringify(user))}; Path=/;`
+`discord_user=${encodeURIComponent(JSON.stringify(user))}; Path=/; Max-Age=3600`
 );
 
 
 res.redirect("/dashboard.html");
-
 
 }
