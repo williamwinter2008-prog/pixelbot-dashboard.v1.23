@@ -50,7 +50,9 @@ redirect_uri:redirect
 
 
 const token = await tokenResponse.json();
-
+if(!token.access_token){
+    return res.status(500).json(token);
+}
 
 const userResponse = await fetch(
 "https://discord.com/api/users/@me",
@@ -66,7 +68,7 @@ const user = await userResponse.json();
 
 res.setHeader(
 "Set-Cookie",
-`discord_user=${encodeURIComponent(JSON.stringify(user))}; Path=/; Max-Age=3600`
+`discord_user=${encodeURIComponent(JSON.stringify(user))}; Path=/; Max-Age=3600; SameSite=Lax`
 );
 
 
