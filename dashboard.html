@@ -356,9 +356,6 @@ const servers =
 document.getElementById("server-list");
 
 
-data.guilds.forEach(guild => {
-
-
 servers.innerHTML += `
 
 <div class="server">
@@ -367,9 +364,11 @@ servers.innerHTML += `
 ${guild.name}
 </span>
 
+<a href="server.html?id=${guild.id}">
 <button>
 Manage
 </button>
+</a>
 
 </div>
 
