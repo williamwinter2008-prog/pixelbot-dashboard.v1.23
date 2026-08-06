@@ -114,7 +114,40 @@ if(userCookie){
 
 </script>
 
+<script>
 
+const cookies = document.cookie.split("; ");
+
+const userCookie = cookies.find(
+cookie => cookie.startsWith("discord_user=")
+);
+
+
+if(userCookie){
+
+    const user = JSON.parse(
+        decodeURIComponent(
+            userCookie.split("=")[1]
+        )
+    );
+
+
+    document.getElementById("username").innerHTML =
+    "Welcome, " + user.username;
+
+
+    document.getElementById("avatar").src =
+    `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+
+}
+else{
+
+    document.getElementById("username").innerHTML =
+    "No Discord user found";
+
+}
+
+</script>
 </body>
 
 </html>
