@@ -1,98 +1,81 @@
-import cookie from "cookie";
-
 export default async function handler(req, res) {
 
-    const clientID = "1532870250482237530";
+const clientID = "1532870250482237530";
 
-    const redirect =
-    "https://pixelbot-dashboard-v1-23-3q9f.vercel.app/api/discord-login";
+const clientSecret = "PkpwJxSvp_RkZ75DiuBqrtbMyqO1yv0q";
 
-
-    if (!req.query.code) {
-
-        const discordURL =
-        "https://discord.com/oauth2/authorize" +
-        "?client_id=" + clientID +
-        "&response_type=code" +
-        "&redirect_uri=" + encodeURIComponent(redirect) +
-        "&scope=identify%20guilds";
-
-        return res.redirect(discordURL);
-    }
+const redirect =
+"https://pixelbot-dashboard-v1-23-3q9f.vercel.app/api/discord-login";
 
 
-    const params = new URLSearchParams();
+if(!req.query.code){
 
-    params.append(
-        "client_id",
-        clientID
-    );
-
-    params.append(
-        "client_secret",
-        process.env.DISCORD_CLIENT_SECRET
-    );
-
-    params.append(
-        "grant_type",
-        "authorization_code"
-    );
-
-    params.append(
-        "code",
-        req.query.code
-    );
-
-    params.append(
-        "redirect_uri",
-        redirect
-    );
+const discordURL =
+"https://discord.com/oauth2/authorize" +
+"?client_id=" + clientID +
+"&response_type=code" +
+"&redirect_uri=" + encodeURIComponent(redirect) +
+"&scope=identify%20guilds";
 
 
-    const tokenResponse = await fetch(
-        "https://discord.com/api/oauth2/token",
-        {
-            method:"POST",
-            headers:{
-                "Content-Type":
-                "application/x-www-form-urlencoded"
-            },
-            body:params
-        }
-    );
+return res.redirect(discordURL);
+
+}
 
 
-    const token = await tokenResponse.json();
+const code = req.query.code;
 
 
-    const userResponse = await fetch(
-        "https://discord.com/api/users/@me",
-        {
-            headers:{
-                Authorization:
-                `Bearer ${token.access_token}`
-            }
-        }
-    );
+const tokenResponse = await fetch(
+"https://discord.com/api/oauth2/token",
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/x-www-form-urlencoded"
+},
+
+body:
+new URLSearchParams({
+
+client_id:clientID,
+
+client_secret:clientSecret,
+
+grant_type:"authorization_code",
+
+code:code,
+
+redirect_uri:redirect
+
+})
+
+});
 
 
-    const user = await userResponse.json();
+const token = await tokenResponse.json();
 
 
-    res.setHeader(
-        "Set-Cookie",
-        cookie.serialize(
-            "discord_user",
-            JSON.stringify(user),
-            {
-                httpOnly:false,
-                maxAge:3600,
-                path:"/"
-            }
-        )
-    );
+const userResponse = await fetch(
+"https://discord.com/api/users/@me",
+{
+headers:{
+Authorization:
+`Bearer ${token.access_token}`
+}
+});
 
 
-    res.redirect("/dashboard.html");
+const user = await userResponse.json();
+
+
+res.setHeader(
+"Set-Cookie",
+`discord_user=${encodeURIComponent(JSON.stringify(user))}; Path=/;`
+);
+
+
+res.redirect("/dashboard.html");
+
 
 }
